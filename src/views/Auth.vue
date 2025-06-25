@@ -9,33 +9,34 @@ export default {
   name: 'Auth',
   components: { profileForm, footers, menus: menu },
 
-  data () {
-    return {
-      profilePic: false,
-      imagePath: '',                       // נאתחל ריק
-      photoPickerConfig: {                 // נאתחל ריק
-        header: 'Upload Profile Pic',
-        accept: 'image/*',
-        path: '',
-        defaultName: 'avatar'
-      },
-      mfa: false,
-      fields: [
-        { type: 'string', name: 'email',        label: 'Email' },
-        { type: 'string', name: 'phone_number', label: 'Phone Number' }
-      ]
-    }
-  },
+ data() {
+  return {
+    profilePic: false,
+    imagePath: '',
+    photoPickerConfig: {
+      header: 'Upload Profile Pic',
+      accept: 'image/*',
+      path: '',
+      defaultName: 'avatar'
+    },
+    mfa: false,
+    fields: [
+      { type: 'string', name: 'email', label: 'Email' },
+      { type: 'string', name: 'phone_number', label: 'Phone Number' }
+    ],
+  };
+},
 
-  mounted () {
-    const user = AmplifyStore.state.user
-    if (user && user.username) {
-      this.imagePath = `${user.username}/avatar`
-      this.photoPickerConfig.path = `${user.username}/`
-    } else {
-      console.warn('User not loaded yet')
-    }
-  },
+mounted() {
+  // טען את המשתמש ברגע שהוא מוכן
+  if (AmplifyStore.state.user) {
+    const username = AmplifyStore.state.user.username;
+    this.imagePath = `${username}/avatar`;
+    this.photoPickerConfig.path = `${username}/`;
+  } else {
+    console.warn("User not loaded yet");
+  }
+},
 
   methods: {
     toggleAccordion (el) {
