@@ -51,10 +51,10 @@ export default {
       profilePic: false,
       imagePath: `${AmplifyStore.state.user.username}/avatar`,
       photoPickerConfig: {
-      header: 'Upload Profile Pic',
-      accept: 'image/*',
-      path: ${AmplifyStore.state.user.username}/,
-      defaultName: 'avatar'
+        header: 'Upload Profile Pic',
+        accept: 'image/*',
+        path: `${AmplifyStore.state.user.username}/`,
+        defaultName: 'avatar'
       },
       mfa: false,
       fields: [
